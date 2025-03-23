@@ -1,0 +1,119 @@
+[
+    {
+        "content": "Hola ani",
+        "delivered": false,
+        "id": 1,
+        "receiver": "ani",
+        "sender": "alonso",
+        "timestamp": 1742531567,
+        "type": "message"
+    },
+    {
+        "content": " No me llegan sus mensajes alonso",
+        "delivered": false,
+        "id": 2,
+        "receiver": "alonso",
+        "sender": "ani",
+        "timestamp": 1742531581,
+        "type": "message"
+    },
+    {
+        "content": "que raro que no le lleguen",
+        "delivered": false,
+        "id": 3,
+        "receiver": "ani",
+        "sender": "alonso",
+        "timestamp": 1742531598,
+        "type": "message"
+    },
+    {
+        "content": "Definitivamente no me llegan sus mensajes",
+        "delivered": false,
+        "id": 4,
+        "receiver": "alonso",
+        "sender": "ani",
+        "timestamp": 1742531617,
+        "type": "message"
+    },
+    {
+        "content": "Hola dos",
+        "delivered": false,
+        "id": 5,
+        "receiver": "dos",
+        "sender": "uno",
+        "timestamp": 1742536590,
+        "type": "message"
+    },
+    {
+        "content": " Hola uno",
+        "delivered": false,
+        "id": 6,
+        "receiver": "uno",
+        "sender": "dos",
+        "timestamp": 1742536600,
+        "type": "message"
+    },
+    {
+        "content": "gg wp",
+        "delivered": false,
+        "id": 7,
+        "receiver": "dos",
+        "sender": "uno",
+        "timestamp": 1742536616,
+        "type": "message"
+    },
+    {
+        "content": " Ani soy un genio",
+        "delivered": false,
+        "id": 8,
+        "receiver": "uno",
+        "sender": "dos",
+        "timestamp": 1742536636,
+        "type": "message"
+    },
+    {
+        "content": "Hola de nuevo alonso",
+        "delivered": false,
+        "id": 9,
+        "receiver": "alonso",
+        "sender": "ani",
+        "timestamp": 1742689768,
+        "type": "message"
+    },
+    {
+        "content": " Hola ani jsjsjs",
+        "delivered": false,
+        "id": 10,
+        "receiver": "ani",
+        "sender": "alonso",
+        "timestamp": 1742689780,
+        "type": "message"
+    },
+    {
+        "content": "Hola Fabricio",
+        "delivered": false,
+        "id": 11,
+        "receiver": "fab",
+        "sender": "sebas",
+        "timestamp": 1742746348,
+        "type": "message"
+    },
+    {
+        "content": "Hola Sebas",
+        "delivered": false,
+        "id": 12,
+        "receiver": "sebas",
+        "sender": "fab",
+        "timestamp": 1742746364,
+        "type": "message"
+    },
+    {
+        "content": "Pura vida",
+        "delivered": false,
+        "id": 13,
+        "receiver": "sebas",
+        "sender": "fab",
+        "timestamp": 1742746429,
+        "type": "message"
+    }
+]
