@@ -5,12 +5,12 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QWidget>
 
 RegistrationWindow::RegistrationWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RegistrationWindow)
-
 {
     ui->setupUi(this);
 
@@ -20,9 +20,9 @@ RegistrationWindow::RegistrationWindow(QWidget *parent) :
     // Create the main container for the register window
     QWidget *container = new QWidget(this);
     container->setStyleSheet("background-color: white; border-radius: 15px;");
-    container->setFixedSize(300, 250); // Adjust as necessary for your design
+    container->setFixedSize(300, 200);
 
-    // Set up the form elements, similar to MainWindow
+    // Set up the form elements
     QLabel *labelUsername = new QLabel("Username:", this);
     QLabel *labelPassword = new QLabel("Password:", this);
     QLineEdit *inputUsername = new QLineEdit(this);
@@ -39,15 +39,30 @@ RegistrationWindow::RegistrationWindow(QWidget *parent) :
     btnConfirm->setStyleSheet(buttonStyle);
     btnCancel->setStyleSheet(buttonStyle);
 
-    // Create layout for form elements
+    // ✅ Create horizontal layouts for each label-input pair
+    QHBoxLayout *usernameLayout = new QHBoxLayout();
+    usernameLayout->addWidget(labelUsername);
+    usernameLayout->addWidget(inputUsername);
+
+    QHBoxLayout *passwordLayout = new QHBoxLayout();
+    passwordLayout->addWidget(labelPassword);
+    passwordLayout->addWidget(inputPassword);
+
+    // Align inputs properly
+    labelUsername->setFixedWidth(85);
+    labelPassword->setFixedWidth(85);
+
+    // ✅ Horizontal layout for buttons
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
+    buttonLayout->addWidget(btnCancel);
+    buttonLayout->addWidget(btnConfirm);
+
+    // Create main vertical layout
     QVBoxLayout *layout = new QVBoxLayout();
-    layout->setSpacing(10);
-    layout->addWidget(labelUsername);
-    layout->addWidget(inputUsername);
-    layout->addWidget(labelPassword);
-    layout->addWidget(inputPassword);
-    layout->addWidget(btnConfirm);
-    layout->addWidget(btnCancel); // Cancel button below Confirm button
+    layout->setSpacing(8);
+    layout->addLayout(usernameLayout);
+    layout->addLayout(passwordLayout);
+    layout->addLayout(buttonLayout);
 
     container->setLayout(layout);
 
@@ -60,7 +75,6 @@ RegistrationWindow::RegistrationWindow(QWidget *parent) :
     // Connect buttons to respective slots
     connect(btnConfirm, &QPushButton::clicked, this, &RegistrationWindow::onConfirmClicked);
     connect(btnCancel, &QPushButton::clicked, this, &RegistrationWindow::onCancelClicked);
-
 }
 
 RegistrationWindow::~RegistrationWindow()
@@ -71,11 +85,9 @@ RegistrationWindow::~RegistrationWindow()
 void RegistrationWindow::onConfirmClicked()
 {
     QMessageBox::information(this, "Register", "Registration successful!");
-    // You can add further logic to handle registration (e.g., saving user data)
 }
 
 void RegistrationWindow::onCancelClicked()
 {
-    this->close();  // Close the register window when Cancel is clicked
+    this->close();
 }
-

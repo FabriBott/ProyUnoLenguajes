@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     QLineEdit *inputUsername = new QLineEdit(this);
     QLineEdit *inputPassword = new QLineEdit(this);
     QPushButton *btnLogin = new QPushButton("Login", this);
-    QPushButton *btnRegister = new QPushButton("Register", this); // Register button
+    QPushButton *btnRegister = new QPushButton("Register", this);
 
     // Set styles for input fields
     inputUsername->setStyleSheet("border: 1px solid gray; border-radius: 5px; padding: 5px;");
