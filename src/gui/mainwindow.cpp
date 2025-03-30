@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "registrationwindow.h"
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -47,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(labelPassword);
     layout->addWidget(inputPassword);
     layout->addWidget(btnLogin);
-    layout->addWidget(btnRegister); // Add Register button below Login
+    layout->addWidget(btnRegister);
 
     container->setLayout(layout);
 
@@ -77,6 +78,8 @@ void MainWindow::onLoginClicked()
 
 void MainWindow::onRegisterClicked()
 {
-    QMessageBox::information(this, "Register", "Register button clicked!");
+    // Create and show the register window
+    RegistrationWindow *registerWindow = new RegistrationWindow(this);
+    registerWindow->show();
 }
 
