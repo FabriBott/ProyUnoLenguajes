@@ -3,3 +3,5 @@
 
 (Fedora)
 sudo dnf install nlohmann-json-devel
+(Ubuntu)
+sudo apt install nlohmann-json3-dev
