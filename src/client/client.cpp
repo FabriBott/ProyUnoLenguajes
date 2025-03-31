@@ -67,8 +67,8 @@ void ConfigManager::saveConfig() {
 // Implementación de MessageHandler //
 //////////////////////////////////////
 
-MessageHandler::MessageHandler(int clientSocket, const string& user) 
-    : socket(clientSocket), username(user) {
+MessageHandler::MessageHandler(int clientSocket, const string& user, const string& pwd, const string& type) 
+    : socket(clientSocket), username(user), password(pwd), authType(type) {
     
     // Configurar dirección del servidor
     memset(&serverAddr, 0, sizeof(serverAddr));
@@ -79,16 +79,17 @@ MessageHandler::MessageHandler(int clientSocket, const string& user)
 
 // Envía un mensaje de registro con el usuario y puerto
 // Espera una respuesta del servidor y la procesa
-bool MessageHandler::sendRegistration(int port) {
-    // Preparar mensaje de registro
-    json registerMsg;
-    registerMsg["type"] = "register";
-    registerMsg["username"] = username;
-    registerMsg["port"] = port;
+bool MessageHandler::sendAuthRequest(int port) {
+    // Preparar mensaje de autenticación
+    json authMsg;
+    authMsg["type"] = authType;  // "login" o "register"
+    authMsg["username"] = username;
+    authMsg["password"] = password;
+    authMsg["port"] = port;
     
-    string msgStr = registerMsg.dump();
+    string msgStr = authMsg.dump();
     
-    // Enviar mensaje de registro
+    // Enviar mensaje de autenticación
     sendto(socket, msgStr.c_str(), msgStr.length(), 0, 
            (struct sockaddr*)&serverAddr, sizeof(serverAddr));
     
@@ -106,17 +107,17 @@ bool MessageHandler::sendRegistration(int port) {
         try {
             json response = json::parse(buffer);
             
-            // Debugging - print received JSON
-            cout << "Respuesta del servidor: " << response.dump() << endl;
-            
-            // Check if it's a register response - don't check status since it's missing
-            if (response["type"] == "register_response") {
-                string message = response.value("content", "Registro completado");
-                cout << COLOR_GREEN << "Registro exitoso: " << message << COLOR_RESET << endl;
-                return true;
-            } else {
-                string errorMsg = response.value("content", "Error desconocido");
-                cerr << COLOR_RED << "Error en registro: " << errorMsg << COLOR_RESET << endl;
+            // Verificar el tipo de respuesta
+            if (response["type"] == "auth_response") {
+                if (response.value("status", "") == "success") {
+                    string message = response.value("content", "Autenticación completada");
+                    cout << COLOR_GREEN << message << COLOR_RESET << endl;
+                    return true;
+                } else {
+                    string errorMsg = response.value("content", "Error desconocido");
+                    cerr << COLOR_RED << errorMsg << COLOR_RESET << endl;
+                    return false;
+                }
             }
         } catch (json::exception& e) {
             cerr << COLOR_RED << "Error al procesar respuesta: " << e.what() << COLOR_RESET << endl;
@@ -198,19 +199,41 @@ void Client::handleSignal(int signal) {
         globalClient->running = false;
         cout << COLOR_YELLOW << "\nCerrando aplicación..." << COLOR_RESET << endl;
     }
-    exit(0);
+    //exit(0);
 }
 
 Client::Client() : clientSocket(-1), running(true), configManager("config/config.json"), messageHandler(nullptr) {
     globalClient = this; // Para manejo de señales
 }
 
+// Client::~Client() {
+//     if (clientSocket >= 0) {
+//         close(clientSocket);
+//     }
+//     if (messageHandler) {
+//         delete messageHandler;
+//         messageHandler = nullptr;
+//     }
+// }
 Client::~Client() {
+    // Signal that we're in the process of cleaning up
+    running = false;
+    
+    // Reset globalClient if it points to this instance
+    if (globalClient == this) {
+        globalClient = nullptr;
+    }
+    
+    // Close socket if open
     if (clientSocket >= 0) {
         close(clientSocket);
+        clientSocket = -1;
     }
+    
+    // Delete message handler if exists
     if (messageHandler) {
         delete messageHandler;
+        messageHandler = nullptr;
     }
 }
 
@@ -257,14 +280,42 @@ void Client::setupSocket(int port) {
     }
 }
 
-bool Client::init() {
-    // Configurar manejo de señales
-    signal(SIGINT, handleSignal);
-    
-    // Solicitar nombre de usuario
-    cout << "Ingrese su nombre de usuario: ";
+bool Client::login() {
+    cout << "\n----- INICIAR SESIÓN -----\n";
+    cout << "Nombre de usuario: ";
     cin >> username;
     
+    cout << "Contraseña: ";
+    cin >> password;
+    
+    // Almacenar los datos y el tipo de operación (login)
+    operationType = "login";
+    return true;
+}
+
+bool Client::registerUser() {
+    cout << "\n----- REGISTRO DE USUARIO -----\n";
+    cout << "Nombre de usuario: ";
+    cin >> username;
+    
+    cout << "Contraseña: ";
+    cin >> password;
+    
+    cout << "Confirmar contraseña: ";
+    string confirmPassword;
+    cin >> confirmPassword;
+    
+    if (password != confirmPassword) {
+        cout << COLOR_RED << "Las contraseñas no coinciden. Intente nuevamente." << COLOR_RESET << endl;
+        return false;
+    }
+    
+    // Almacenar los datos y el tipo de operación (register)
+    operationType = "register";
+    return true;
+}
+
+void Client::setupAndRun() {
     // Configurar socket
     int port = configManager.getPort();
     setupSocket(port);
@@ -275,15 +326,61 @@ bool Client::init() {
     cout << "Cliente iniciado en puerto " << port << endl;
     
     // Crear manejador de mensajes
-    messageHandler = new MessageHandler(clientSocket, username);
+    messageHandler = new MessageHandler(clientSocket, username, password, operationType);
     
     // Registrar usuario en el servidor
-    if (!messageHandler->sendRegistration(port)) {
-        cerr << COLOR_RED << "No se pudo registrar con el servidor" << COLOR_RESET << endl;
-        return false;
+    if (!messageHandler->sendAuthRequest(port)) {
+        cerr << COLOR_RED << "No se pudo " << (operationType == "login" ? "iniciar sesión" : "registrar") 
+             << " con el servidor" << COLOR_RESET << endl;
+        return;
     }
     
-    return true;
+    // Si llegamos aquí, la autenticación fue exitosa
+    run();
+}
+
+bool Client::init() {
+    // Configurar manejo de señales
+    signal(SIGINT, handleSignal);
+    
+    int choice;
+    do {
+        cout << "\n===== SISTEMA DE CHAT =====\n";
+        cout << "1. Iniciar sesión\n";
+        cout << "2. Registrarse\n";
+        cout << "3. Salir\n";
+        cout << "Seleccione una opción: ";
+        cin >> choice;
+        
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << COLOR_RED << "Entrada inválida. Intente nuevamente." << COLOR_RESET << endl;
+            choice = 0;
+        }
+        
+        switch (choice) {
+            case 1:
+                if (login()) {
+                    setupAndRun();
+                    return true;
+                }
+                break;
+            case 2:
+                if (registerUser()) {
+                    setupAndRun();
+                    return true;
+                }
+                break;
+            case 3:
+                cout << "Saliendo del programa...\n";
+                return false;
+            default:
+                cout << COLOR_RED << "Opción inválida. Intente nuevamente." << COLOR_RESET << endl;
+        }
+    } while (choice != 3);
+
+    return false;
 }
 
 void Client::handleUserInput() {

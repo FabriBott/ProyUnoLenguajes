@@ -62,21 +62,50 @@ User* UserManager::findUser(const string& username) {
 
 // Si el usuario existe, actualiza su IP y puerto.
 // Si no existe, lo agrega a la lista y guarda los cambios.
-bool UserManager::registerUser(const string& username, const string& ip, int port) {
+bool UserManager::registerUser(const string& username, const string& password, const string& ip, int port) {
     User* existingUser = findUser(username);
 
     if (existingUser) {
+        // User exists, check password and update connection info
+        if (!password.empty() && existingUser->password != password) {
+            cout << "Autenticación fallida para usuario: " << username << endl;
+            return false;
+        }
+        
         existingUser->ip = ip;
         existingUser->port = port;
+        
+        // If existing user has no password yet, set it
+        if (existingUser->password.empty() && !password.empty()) {
+            existingUser->password = password;
+        }
+        
         cout << "Usuario actualizado: " << username << " en " << ip << ":" << port << endl;
     } else {
-        User newUser(username, ip, port);
+        // Create new user
+        User newUser(username, password, ip, port);
         users.push_back(newUser);
         cout << "Nuevo usuario registrado: " << username << " en " << ip << ":" << port << endl;
     }
 
     saveUsers();
     return true;
+}
+
+bool UserManager::authenticateUser(const string& username, const string& password) {
+    User* user = findUser(username);
+    if (!user) {
+        return false; // User not found
+    }
+    
+    // For existing users that might not have a password yet
+    if (user->password.empty()) {
+        user->password = password;
+        saveUsers();
+        return true;
+    }
+    
+    return user->password == password;
 }
 
 vector<User>& UserManager::getAllUsers() {
@@ -201,29 +230,88 @@ bool Server::init() {
     return true;
 }
 
-// Registra un nuevo usuario usando su dirección IP y puerto.
-void Server::processRegistration(const json& data, struct sockaddr_in clientAddr) {
+void Server::processLogin(const json& data, struct sockaddr_in clientAddr) {
     string username = data["username"];
+    string password = data["password"];
+    int port = data["port"];
     
     // Convertir IP a string
     char clientIP[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(clientAddr.sin_addr), clientIP, INET_ADDRSTRLEN);
     
-    // Registrar usuario
-    userManager.registerUser(username, string(clientIP), data["port"]);
+    bool success = false;
+    string responseMessage;
     
-    // Create JSON response directly instead of using Message::createResponse
+    // Buscar usuario
+    User* user = userManager.findUser(username);
+    
+    if (user) {
+        // Verificar contraseña
+        if (user->password == password) {
+            // Actualizar información de conexión
+            user->ip = string(clientIP);
+            user->port = port;
+            userManager.saveUsers();
+            success = true;
+            responseMessage = "Inicio de sesión exitoso";
+        } else {
+            responseMessage = "Contraseña incorrecta";
+        }
+    } else {
+        responseMessage = "Usuario no encontrado";
+    }
+    
+    // Crear respuesta
     json responseJson;
-    responseJson["type"] = "register_response";
-    responseJson["status"] = "success";  // Explicitly include status
-    responseJson["content"] = "Registro exitoso";
-    responseJson["delivered"] = false;
+    responseJson["type"] = "auth_response";
+    responseJson["status"] = success ? "success" : "error";
+    responseJson["content"] = responseMessage;
     responseJson["timestamp"] = time(nullptr);
-    responseJson["sender"] = "";
-    responseJson["receiver"] = "";
     
     string responseStr = responseJson.dump();
     
+    // Enviar respuesta
+    sendto(serverSocket, responseStr.c_str(), responseStr.length(), 0, 
+           (struct sockaddr*)&clientAddr, sizeof(clientAddr));
+}
+
+// Registra un nuevo usuario usando su dirección IP y puerto.
+void Server::processRegistration(const json& data, struct sockaddr_in clientAddr) {
+    string username = data["username"];
+    string password = data["password"];
+    int port = data["port"];
+    
+    // Convertir IP a string
+    char clientIP[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &(clientAddr.sin_addr), clientIP, INET_ADDRSTRLEN);
+    
+    bool success = false;
+    string responseMessage;
+    
+    // Verificar si el usuario ya existe
+    User* existingUser = userManager.findUser(username);
+    
+    if (existingUser) {
+        responseMessage = "El nombre de usuario ya está en uso";
+    } else {
+        // Crear nuevo usuario
+        User newUser(username, password, string(clientIP), port);
+        userManager.getAllUsers().push_back(newUser);
+        userManager.saveUsers();
+        success = true;
+        responseMessage = "Registro exitoso";
+    }
+    
+    // Crear respuesta
+    json responseJson;
+    responseJson["type"] = "auth_response";
+    responseJson["status"] = success ? "success" : "error";
+    responseJson["content"] = responseMessage;
+    responseJson["timestamp"] = time(nullptr);
+    
+    string responseStr = responseJson.dump();
+    
+    // Enviar respuesta
     sendto(serverSocket, responseStr.c_str(), responseStr.length(), 0, 
            (struct sockaddr*)&clientAddr, sizeof(clientAddr));
 }
@@ -319,11 +407,15 @@ void Server::run() {
                 string msgType = data["type"];
                 
                 // Procesar según tipo de mensaje
-                if (msgType == "register") {
+                if (msgType == "login") {
+                    processLogin(data, clientAddr);
+                } else if (msgType == "register") {
                     processRegistration(data, clientAddr);
                 } else if (msgType == "message") {
                     processMessage(data);
                 }
+                // You can keep the old "register" handling for backward compatibility
+                // or remove it if you're updating all clients
             } catch (json::exception& e) {
                 cerr << "Error al procesar mensaje JSON: " << e.what() << endl;
             }

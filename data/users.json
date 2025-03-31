@@ -2,37 +2,22 @@
     {
         "contacts": [],
         "ip": "127.0.0.1",
-        "port": 8686,
+        "password": "hola",
+        "port": 8585,
         "username": "alonso"
     },
     {
         "contacts": [],
         "ip": "127.0.0.1",
-        "port": 8585,
+        "password": "hola",
+        "port": 8686,
         "username": "ani"
     },
     {
         "contacts": [],
         "ip": "127.0.0.1",
-        "port": 8787,
-        "username": "uno"
-    },
-    {
-        "contacts": [],
-        "ip": "127.0.0.1",
-        "port": 8686,
-        "username": "dos"
-    },
-    {
-        "contacts": [],
-        "ip": "127.0.0.1",
-        "port": 8585,
-        "username": "sebas"
-    },
-    {
-        "contacts": [],
-        "ip": "127.0.0.1",
-        "port": 8686,
+        "password": "hola",
+        "port": 8888,
         "username": "fab"
     }
 ]
