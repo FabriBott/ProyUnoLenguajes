@@ -8,17 +8,16 @@
 // Declaración de la clase UserManager
 class UserManager {
     private:
-        vector<User> users;
         string usersFile;
-
+        vector<User> users;
+    
     public:
-        UserManager(const string& file = "data/users.json");
-        
-        // Métodos para manejo de usuarios
+        UserManager(const string& file);
         void loadUsers();
         void saveUsers();
         User* findUser(const string& username);
-        bool registerUser(const string& username, const string& ip, int port);
+        bool registerUser(const string& username, const string& password, const string& ip, int port);
+        bool authenticateUser(const string& username, const string& password);
         vector<User>& getAllUsers();
 };
 
@@ -46,6 +45,7 @@ class Server {
         MessageManager messageManager;
         
         // Métodos privados para procesar mensajes
+        void processLogin(const json& data, struct sockaddr_in clientAddr);
         void processRegistration(const json& data, struct sockaddr_in clientAddr);
         void processMessage(const json& data);
 
