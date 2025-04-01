@@ -53,5 +53,16 @@ public:
     bool checkCredentials(const string& username, const string& password) const {
         return this->username == username && this->password == password;
     }
+
+    bool addContact(const string& contactName) {
+        // Evitar auto-contactos y duplicados
+        if (contactName != username && 
+            std::find(contacts.begin(), contacts.end(), contactName) == contacts.end()) {
+            contacts.push_back(contactName);
+            return true;  // Indica que se agregó
+        }
+        return false;
+    }
+    
 };
 #endif // USER_HPP

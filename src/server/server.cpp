@@ -323,10 +323,18 @@ void Server::processMessage(const json& data) {
     
     // Buscar usuario receptor
     User* receiverUser = userManager.findUser(receiver);
+    User* senderUser = userManager.findUser(sender);
 
     if (!receiverUser) {
         cout << "Usuario destinatario no encontrado: " << receiver << endl;
         return;
+    }
+
+    bool senderUpdated = senderUser->addContact(receiver);
+    bool receiverUpdated = receiverUser->addContact(sender);
+
+    if (senderUpdated || receiverUpdated) {
+        userManager.saveUsers();  // Persiste los cambios
     }
     
     if (receiverUser->ip.empty() || receiverUser->port <= 0) {
