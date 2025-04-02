@@ -16,7 +16,7 @@ INCLUDES = -I./include
 # Source directories
 SERVER_SRC_DIR = src/server
 CLIENT_SRC_DIR = src/client
-QT_PROJECT_DIR = /home/ani/Documents/Lenguajes\ de\ Programación/ProyUnoLenguajes/src/gui/gui  # Qt project directory
+QT_PROJECT_DIR = "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui"
 
 # Source files
 SERVER_SRCS = $(SERVER_SRC_DIR)/main_server.cpp $(SERVER_SRC_DIR)/server.cpp
@@ -30,10 +30,6 @@ CLIENT_OBJS = $(CLIENT_SRCS:.cpp=.o)
 SERVER_TARGET = server
 CLIENT_TARGET = client
 GUI_TARGET = gui
-
-# Qt build commands (using cmake for Qt)
-MAKE = make
-GUI_EXECUTABLE = "$(QT_PROJECT_DIR)./gui" 
 
 # Default target
 all: directories $(SERVER_TARGET) $(CLIENT_TARGET) $(GUI_TARGET)
@@ -56,8 +52,8 @@ $(CLIENT_TARGET): $(CLIENT_OBJS)
 
 # Build and run GUI
 $(GUI_TARGET):
-	cd $(QT_PROJECT_DIR) && cmake . && $(MAKE)  # Build Qt project
-	"$(GUI_EXECUTABLE)" & 
+	cd $(QT_PROJECT_DIR) && cmake . && make  
+	(cd $(QT_PROJECT_DIR) && ./gui &)  
 
 # Compile object files from cpp files
 %.o: %.cpp
@@ -66,6 +62,7 @@ $(GUI_TARGET):
 # Clean the build
 clean:
 	rm -f $(SERVER_OBJS) $(CLIENT_OBJS) $(SERVER_TARGET) $(CLIENT_TARGET)
-	cd $(QT_PROJECT_DIR) && $(MAKE) clean  # Clean Qt build
+	cd "$(QT_PROJECT_DIR)" && $(MAKE) clean
+
 
 .PHONY: all clean directories

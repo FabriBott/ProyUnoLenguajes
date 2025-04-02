@@ -15,9 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // Set window background color (pastel blue)
-    this->setStyleSheet("background-color: #A7C7E7;");
+    this->setStyleSheet("background-color: #407280;");
 
-    // Create the main container (white rounded rectangle)
+    // White rounded rectangle)
     QWidget *container = new QWidget(this);
     container->setStyleSheet("background-color: white; border-radius: 15px;");
     container->setFixedSize(300, 250); // Increased height to fit Register button

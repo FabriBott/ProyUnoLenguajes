@@ -15,7 +15,7 @@ RegistrationWindow::RegistrationWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // Set the same background and style for the register window
-    this->setStyleSheet("background-color: #A7C7E7;");
+    this->setStyleSheet("background-color: #407280;");
 
     // Create the main container for the register window
     QWidget *container = new QWidget(this);

@@ -1,0 +1,8 @@
+/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles/gui.dir
+/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles/edit_cache.dir
+/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles/rebuild_cache.dir
+/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles/list_install_components.dir
+/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles/install.dir
+/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles/install/local.dir
+/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles/install/strip.dir
+/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles/gui_autogen.dir

@@ -17,6 +17,9 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        registrationwindow.cpp
+        registrationwindow.h
+        registrationwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
