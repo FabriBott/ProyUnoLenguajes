@@ -62,7 +62,7 @@ $(GUI_TARGET):
 # Clean the build
 clean:
 	rm -f $(SERVER_OBJS) $(CLIENT_OBJS) $(SERVER_TARGET) $(CLIENT_TARGET)
-	cd "$(QT_PROJECT_DIR)" && $(MAKE) clean
+	cd $(QT_PROJECT_DIR) && $(MAKE) clean
 
 
 .PHONY: all clean directories
