@@ -319,8 +319,6 @@ void Client::setupAndRun() {
     // Configurar socket
     int port = configManager.getPort();
     setupSocket(port);
-
-    // Obtener el puerto actualizado (en caso de que haya cambiado en setupSocket)
     port = configManager.getPort();
     
     cout << "Cliente iniciado en puerto " << port << endl;
@@ -330,12 +328,36 @@ void Client::setupAndRun() {
     
     // Registrar usuario en el servidor
     if (!messageHandler->sendAuthRequest(port)) {
-        cerr << COLOR_RED << "No se pudo " << (operationType == "login" ? "iniciar sesión" : "registrar") 
-             << " con el servidor" << COLOR_RESET << endl;
+        cerr << COLOR_RED << "Error de autenticación" << COLOR_RESET << endl;
         return;
     }
-    
-    // Si llegamos aquí, la autenticación fue exitosa
+
+    //func lambda
+    auto loadContacts = [this]() {
+        ifstream usersFile("data/users.json");
+
+        json usersData;
+        usersFile >> usersData; 
+        // itera sobre los users
+        for (auto& user : usersData) {
+            if (user["username"] == username) {
+                cout << COLOR_CYAN << "\nTus contactos" << COLOR_RESET << endl;
+
+                if (user.contains("contacts")) {
+                    // itera sobre contactos
+                    for (auto& contact : user["contacts"]) {
+                        cout << " • " << contact.get<string>() << endl;
+                    }
+                } else {
+                    cout << "No se tiene contactos" << endl;
+                }
+                return;
+            }
+        }
+        cout << "Usuario no encontrado" << endl;
+    };
+
+    loadContacts(); 
     run();
 }
 
