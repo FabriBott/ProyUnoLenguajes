@@ -351,7 +351,7 @@ void Client::setupAndRun() {
                 } else {
                     cout << "No se tiene contactos" << endl;
                 }
-                return;
+                return; 
             }
         }
         cout << "Usuario no encontrado" << endl;
