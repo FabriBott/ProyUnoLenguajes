@@ -315,7 +315,7 @@ bool Client::registerUser() {
     return true;
 }
 
-void Client::setupAndRun() {
+void Client::setupAndRun() { 
     // Configurar socket
     int port = configManager.getPort();
     setupSocket(port);
@@ -357,6 +357,7 @@ void Client::setupAndRun() {
         cout << "Usuario no encontrado" << endl;
     };
 
+    // llama funciones
     loadContacts(); 
     run();
 }
