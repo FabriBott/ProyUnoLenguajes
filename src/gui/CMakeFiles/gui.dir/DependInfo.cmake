@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/clientwindow.cpp" "CMakeFiles/gui.dir/clientwindow.cpp.o" "gcc" "CMakeFiles/gui.dir/clientwindow.cpp.o.d"
   "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/gui_autogen/mocs_compilation.cpp" "CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o.d"
   "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/main.cpp" "CMakeFiles/gui.dir/main.cpp.o" "gcc" "CMakeFiles/gui.dir/main.cpp.o.d"
   "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/mainwindow.cpp" "CMakeFiles/gui.dir/mainwindow.cpp.o" "gcc" "CMakeFiles/gui.dir/mainwindow.cpp.o.d"

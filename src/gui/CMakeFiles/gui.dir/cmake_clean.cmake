@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/gui_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/gui_autogen.dir/ParseCache.txt"
   "gui_autogen"
+  "CMakeFiles/gui.dir/clientwindow.cpp.o"
+  "CMakeFiles/gui.dir/clientwindow.cpp.o.d"
   "CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o"
   "CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o.d"
   "CMakeFiles/gui.dir/main.cpp.o"

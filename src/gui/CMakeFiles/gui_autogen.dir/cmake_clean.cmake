@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/gui_autogen"
+  "gui_autogen/include/ui_clientwindow.h"
   "gui_autogen/include/ui_mainwindow.h"
   "gui_autogen/include/ui_registrationwindow.h"
   "gui_autogen/mocs_compilation.cpp"
