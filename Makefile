@@ -16,7 +16,7 @@ INCLUDES = -I./include
 # Source directories
 SERVER_SRC_DIR = src/server
 CLIENT_SRC_DIR = src/client
-QT_PROJECT_DIR = "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui"
+QT_PROJECT_DIR = src/gui
 
 # Source files
 SERVER_SRCS = $(SERVER_SRC_DIR)/main_server.cpp $(SERVER_SRC_DIR)/server.cpp
@@ -32,7 +32,7 @@ CLIENT_TARGET = client
 GUI_TARGET = gui
 
 # Default target
-all: directories $(SERVER_TARGET) $(CLIENT_TARGET) $(GUI_TARGET)
+all: directories $(SERVER_TARGET) $(CLIENT_TARGET) run_gui
 
 # Directories
 directories:
@@ -54,6 +54,14 @@ $(CLIENT_TARGET): $(CLIENT_OBJS)
 $(GUI_TARGET):
 	cd $(QT_PROJECT_DIR) && cmake . && make  
 	(cd $(QT_PROJECT_DIR) && ./gui &)  
+
+# 	@./$(CLIENT_TARGET) &
+# @echo "Building and launching GUI..."
+run_gui: $(SERVER_TARGET) $(CLIENT_TARGET)
+	@echo "Starting server and client..."
+	@./$(SERVER_TARGET) &
+
+	@cd $(QT_PROJECT_DIR) && cmake . && make && ./gui
 
 # Compile object files from cpp files
 %.o: %.cpp

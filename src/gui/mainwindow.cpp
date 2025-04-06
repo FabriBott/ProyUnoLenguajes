@@ -1,85 +1,100 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "registrationwindow.h"
-#include <QLabel>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QVBoxLayout>
+#include "ui_mainwindow.h"
+#include "clientwindow.h"
 #include <QMessageBox>
-#include <QWidget>
+#include <QVBoxLayout>
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , client(new Client(this))
 {
     ui->setupUi(this);
+    setupUI();
+    setupConnections();
+}
 
-    // Set window background color (pastel blue)
+void MainWindow::setupUI() {
+    // Set window background color
     this->setStyleSheet("background-color: #407280;");
 
-    // White rounded rectangle)
+    // Create container widget
     QWidget *container = new QWidget(this);
     container->setStyleSheet("background-color: white; border-radius: 15px;");
-    container->setFixedSize(300, 250); // Increased height to fit Register button
+    container->setFixedSize(300, 250);
 
-    // Create username and password fields
-    QLabel *labelUsername = new QLabel("Username:", this);
-    QLabel *labelPassword = new QLabel("Password:", this);
-    QLineEdit *inputUsername = new QLineEdit(this);
-    QLineEdit *inputPassword = new QLineEdit(this);
-    QPushButton *btnLogin = new QPushButton("Login", this);
-    QPushButton *btnRegister = new QPushButton("Register", this);
-
-    // Set styles for input fields
-    inputUsername->setStyleSheet("border: 1px solid gray; border-radius: 5px; padding: 5px;");
-    inputPassword->setStyleSheet("border: 1px solid gray; border-radius: 5px; padding: 5px;");
+    // Create and style UI elements
+    inputUsername = new QLineEdit(this);
+    inputPassword = new QLineEdit(this);
     inputPassword->setEchoMode(QLineEdit::Password);
 
-    // Set style for buttons
-    QString buttonStyle = "background-color: #A7C7E7; border-radius: 10px; padding: 8px;";
-    btnLogin->setStyleSheet(buttonStyle);
-    btnRegister->setStyleSheet(buttonStyle);
+    btnLogin = new QPushButton("Login", this);
+    btnRegister = new QPushButton("Register", this);
 
-    // Create layout for form elements
+    // Setup layouts
     QVBoxLayout *layout = new QVBoxLayout();
-    layout->setSpacing(10);
-    layout->addWidget(labelUsername);
+    layout->addWidget(new QLabel("Username:"));
     layout->addWidget(inputUsername);
-    layout->addWidget(labelPassword);
+    layout->addWidget(new QLabel("Password:"));
     layout->addWidget(inputPassword);
     layout->addWidget(btnLogin);
     layout->addWidget(btnRegister);
 
     container->setLayout(layout);
 
-    // Create a main layout to center the container
     QWidget *centralWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
-    mainLayout->addStretch();
     mainLayout->addWidget(container, 0, Qt::AlignCenter);
-    mainLayout->addStretch();
-
     setCentralWidget(centralWidget);
+}
 
-    // Connect button clicks
+void MainWindow::setupConnections() {
+    // Connect UI buttons using the dynamically created buttons
     connect(btnLogin, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
     connect(btnRegister, &QPushButton::clicked, this, &MainWindow::onRegisterClicked);
+
+    // Connect only necessary client signals
+    connect(client, &Client::authComplete, this, &MainWindow::handleAuthResult);
+    connect(client, &Client::errorOccurred, this, &MainWindow::onErrorOccurred);
 }
 
-MainWindow::~MainWindow()
-{
+
+void MainWindow::onLoginClicked() {
+    QString username = inputUsername->text();
+    QString password = inputPassword->text();
+
+    if(username.isEmpty() || password.isEmpty()) {
+        QMessageBox::warning(this, "Error", "Username and password cannot be empty");
+        return;
+    }
+
+    if(client->login(username, password)) {
+        client->startConnection();  // Start network operations
+    }
+}
+
+void MainWindow::onRegisterClicked() {
+    RegistrationWindow *regWindow = new RegistrationWindow(client, this);
+    regWindow->show();
+}
+
+void MainWindow::handleAuthResult(bool success, const QString& message) {
+    if(success) {
+        // Hide login window and show chat window
+        this->hide();
+        ClientWindow *chatWindow = new ClientWindow(client); // Pass client to chat window
+        chatWindow->show();
+    } else {
+        QMessageBox::warning(this, "Authentication Failed", message);
+    }
+}
+
+void MainWindow::onErrorOccurred(const QString& error) {
+    QMessageBox::critical(this, "Error", error);
+}
+
+MainWindow::~MainWindow() {
     delete ui;
 }
-
-void MainWindow::onLoginClicked()
-{
-    QMessageBox::information(this, "Login", "Login button clicked!");
-}
-
-void MainWindow::onRegisterClicked()
-{
-    // Create and show the register window
-    RegistrationWindow *registerWindow = new RegistrationWindow(this);
-    registerWindow->show();
-}
-

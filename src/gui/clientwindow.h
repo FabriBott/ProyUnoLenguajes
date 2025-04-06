@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTextEdit>
+#include "../../include/client.hpp"
 
 namespace Ui {
 class ClientWindow;
@@ -16,19 +17,17 @@ class ClientWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit ClientWindow(QWidget *parent = nullptr);
+    explicit ClientWindow(Client *client, QWidget *parent = nullptr);
     ~ClientWindow();
 
 private slots:
     void onSendMessage();
-    void onMessageReceived();
+    void onMessageReceived(const QString &message);
     void onDisconnected();
 
 private:
     Ui::ClientWindow *ui;
-    QTcpSocket *socket;
-
-    // Widgets
+    Client *m_client;  // Store the client pointer
     QLineEdit *messageInput;
     QPushButton *sendButton;
     QTextEdit *chatDisplay;

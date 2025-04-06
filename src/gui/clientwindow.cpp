@@ -2,38 +2,33 @@
 #include "ui_clientwindow.h"
 #include <QVBoxLayout>
 #include <QMessageBox>
-#include "../../include/common.hpp"
 
-ClientWindow::ClientWindow(QWidget *parent) :
+ClientWindow::ClientWindow(Client *client, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::ClientWindow)
+    ui(new Ui::ClientWindow),
+    m_client(client)  // Initialize the client
 {
     ui->setupUi(this);
 
-    // Crear widgets manualmente
+    // Create widgets
     messageInput = new QLineEdit(this);
-    sendButton = new QPushButton("Enviar", this);
+    sendButton = new QPushButton("Send", this);
     chatDisplay = new QTextEdit(this);
     chatDisplay->setReadOnly(true);
 
-    // Layout para organizar los widgets
+    // Setup layout
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(chatDisplay);
     layout->addWidget(messageInput);
     layout->addWidget(sendButton);
 
-    // Crear un widget central y asignarle el layout
     QWidget *centralWidget = new QWidget(this);
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
 
-    // Crear y configurar el socket
-    socket = new QTcpSocket(this);
-    socket->connectToHost(SERVER_IP, SERVER_PORT);
-
-    // Conectar señales y slots
-    connect(socket, &QTcpSocket::readyRead, this, &ClientWindow::onMessageReceived);
-    connect(socket, &QTcpSocket::disconnected, this, &ClientWindow::onDisconnected);
+    // Connect signals from the Client
+    connect(m_client, &Client::messageReceived, this, &ClientWindow::onMessageReceived);
+    connect(m_client, &Client::disconnected, this, &ClientWindow::onDisconnected);
     connect(sendButton, &QPushButton::clicked, this, &ClientWindow::onSendMessage);
 }
 
@@ -41,15 +36,15 @@ void ClientWindow::onSendMessage()
 {
     QString message = messageInput->text();
     if (!message.isEmpty()) {
-        socket->write(message.toUtf8());
+        m_client->sendMessage(message);  // Use client to send message
+        chatDisplay->append("You: " + message);
         messageInput->clear();
     }
 }
 
-void ClientWindow::onMessageReceived()
+void ClientWindow::onMessageReceived(const QString &message)
 {
-    QByteArray data = socket->readAll();
-    chatDisplay->append("Server: " + QString(data));
+    chatDisplay->append("Server: " + message);
 }
 
 void ClientWindow::onDisconnected()

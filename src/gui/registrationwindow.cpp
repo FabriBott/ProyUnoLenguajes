@@ -8,9 +8,10 @@
 #include <QHBoxLayout>
 #include <QWidget>
 
-RegistrationWindow::RegistrationWindow(QWidget *parent) :
+RegistrationWindow::RegistrationWindow(Client *client, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::RegistrationWindow)
+    ui(new Ui::RegistrationWindow),
+    m_client(client)
 {
     ui->setupUi(this);
 
@@ -39,7 +40,7 @@ RegistrationWindow::RegistrationWindow(QWidget *parent) :
     btnConfirm->setStyleSheet(buttonStyle);
     btnCancel->setStyleSheet(buttonStyle);
 
-    // ✅ Create horizontal layouts for each label-input pair
+    // Create horizontal layouts for each label-input pair
     QHBoxLayout *usernameLayout = new QHBoxLayout();
     usernameLayout->addWidget(labelUsername);
     usernameLayout->addWidget(inputUsername);
@@ -52,7 +53,7 @@ RegistrationWindow::RegistrationWindow(QWidget *parent) :
     labelUsername->setFixedWidth(85);
     labelPassword->setFixedWidth(85);
 
-    // ✅ Horizontal layout for buttons
+    // Horizontal layout for buttons
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addWidget(btnCancel);
     buttonLayout->addWidget(btnConfirm);

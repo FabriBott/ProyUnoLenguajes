@@ -73,71 +73,71 @@ CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o: CMakeFiles/gui.dir/flags.
 CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o: gui_autogen/mocs_compilation.cpp
 CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o: CMakeFiles/gui.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o -MF CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/gui_autogen/mocs_compilation.cpp"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o -MF CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/gui_autogen/mocs_compilation.cpp"
 
 CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.i"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/gui_autogen/mocs_compilation.cpp" > CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/gui_autogen/mocs_compilation.cpp" > CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.i
 
 CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.s"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/gui_autogen/mocs_compilation.cpp" -o CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/gui_autogen/mocs_compilation.cpp" -o CMakeFiles/gui.dir/gui_autogen/mocs_compilation.cpp.s
 
 CMakeFiles/gui.dir/main.cpp.o: CMakeFiles/gui.dir/flags.make
 CMakeFiles/gui.dir/main.cpp.o: main.cpp
 CMakeFiles/gui.dir/main.cpp.o: CMakeFiles/gui.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gui.dir/main.cpp.o"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/main.cpp.o -MF CMakeFiles/gui.dir/main.cpp.o.d -o CMakeFiles/gui.dir/main.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/main.cpp"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/main.cpp.o -MF CMakeFiles/gui.dir/main.cpp.o.d -o CMakeFiles/gui.dir/main.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/main.cpp"
 
 CMakeFiles/gui.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gui.dir/main.cpp.i"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/main.cpp" > CMakeFiles/gui.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/main.cpp" > CMakeFiles/gui.dir/main.cpp.i
 
 CMakeFiles/gui.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gui.dir/main.cpp.s"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/main.cpp" -o CMakeFiles/gui.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/main.cpp" -o CMakeFiles/gui.dir/main.cpp.s
 
 CMakeFiles/gui.dir/mainwindow.cpp.o: CMakeFiles/gui.dir/flags.make
 CMakeFiles/gui.dir/mainwindow.cpp.o: mainwindow.cpp
 CMakeFiles/gui.dir/mainwindow.cpp.o: CMakeFiles/gui.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/gui.dir/mainwindow.cpp.o"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/mainwindow.cpp.o -MF CMakeFiles/gui.dir/mainwindow.cpp.o.d -o CMakeFiles/gui.dir/mainwindow.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/mainwindow.cpp"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/mainwindow.cpp.o -MF CMakeFiles/gui.dir/mainwindow.cpp.o.d -o CMakeFiles/gui.dir/mainwindow.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/mainwindow.cpp"
 
 CMakeFiles/gui.dir/mainwindow.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gui.dir/mainwindow.cpp.i"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/mainwindow.cpp" > CMakeFiles/gui.dir/mainwindow.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/mainwindow.cpp" > CMakeFiles/gui.dir/mainwindow.cpp.i
 
 CMakeFiles/gui.dir/mainwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gui.dir/mainwindow.cpp.s"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/mainwindow.cpp" -o CMakeFiles/gui.dir/mainwindow.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/mainwindow.cpp" -o CMakeFiles/gui.dir/mainwindow.cpp.s
 
 CMakeFiles/gui.dir/registrationwindow.cpp.o: CMakeFiles/gui.dir/flags.make
 CMakeFiles/gui.dir/registrationwindow.cpp.o: registrationwindow.cpp
 CMakeFiles/gui.dir/registrationwindow.cpp.o: CMakeFiles/gui.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/gui.dir/registrationwindow.cpp.o"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/registrationwindow.cpp.o -MF CMakeFiles/gui.dir/registrationwindow.cpp.o.d -o CMakeFiles/gui.dir/registrationwindow.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/registrationwindow.cpp"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/registrationwindow.cpp.o -MF CMakeFiles/gui.dir/registrationwindow.cpp.o.d -o CMakeFiles/gui.dir/registrationwindow.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/registrationwindow.cpp"
 
 CMakeFiles/gui.dir/registrationwindow.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gui.dir/registrationwindow.cpp.i"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/registrationwindow.cpp" > CMakeFiles/gui.dir/registrationwindow.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/registrationwindow.cpp" > CMakeFiles/gui.dir/registrationwindow.cpp.i
 
 CMakeFiles/gui.dir/registrationwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gui.dir/registrationwindow.cpp.s"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/registrationwindow.cpp" -o CMakeFiles/gui.dir/registrationwindow.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/registrationwindow.cpp" -o CMakeFiles/gui.dir/registrationwindow.cpp.s
 
 CMakeFiles/gui.dir/clientwindow.cpp.o: CMakeFiles/gui.dir/flags.make
 CMakeFiles/gui.dir/clientwindow.cpp.o: clientwindow.cpp
 CMakeFiles/gui.dir/clientwindow.cpp.o: CMakeFiles/gui.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/gui.dir/clientwindow.cpp.o"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/clientwindow.cpp.o -MF CMakeFiles/gui.dir/clientwindow.cpp.o.d -o CMakeFiles/gui.dir/clientwindow.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/clientwindow.cpp"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gui.dir/clientwindow.cpp.o -MF CMakeFiles/gui.dir/clientwindow.cpp.o.d -o CMakeFiles/gui.dir/clientwindow.cpp.o -c "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/clientwindow.cpp"
 
 CMakeFiles/gui.dir/clientwindow.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gui.dir/clientwindow.cpp.i"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/clientwindow.cpp" > CMakeFiles/gui.dir/clientwindow.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/clientwindow.cpp" > CMakeFiles/gui.dir/clientwindow.cpp.i
 
 CMakeFiles/gui.dir/clientwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gui.dir/clientwindow.cpp.s"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/clientwindow.cpp" -o CMakeFiles/gui.dir/clientwindow.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/ani/Documents/Lenguajes de Programación/ProyUnoLenguajes/src/gui/clientwindow.cpp" -o CMakeFiles/gui.dir/clientwindow.cpp.s
 
 # Object files for target gui
 gui_OBJECTS = \
