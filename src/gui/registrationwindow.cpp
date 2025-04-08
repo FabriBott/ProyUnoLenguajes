@@ -8,10 +8,9 @@
 #include <QHBoxLayout>
 #include <QWidget>
 
-RegistrationWindow::RegistrationWindow(Client *client, QWidget *parent) :
+RegistrationWindow::RegistrationWindow(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::RegistrationWindow),
-    m_client(client)
+    ui(new Ui::RegistrationWindow)
 {
     ui->setupUi(this);
 

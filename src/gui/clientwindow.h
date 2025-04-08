@@ -2,35 +2,31 @@
 #define CLIENTWINDOW_H
 
 #include <QMainWindow>
-#include <QTcpSocket>
+#include <QListWidget>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTextEdit>
-#include "../../include/client.hpp"
-
-namespace Ui {
-class ClientWindow;
-}
 
 class ClientWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit ClientWindow(Client *client, QWidget *parent = nullptr);
+    explicit ClientWindow(QWidget *parent = nullptr);
     ~ClientWindow();
 
 private slots:
     void onSendMessage();
-    void onMessageReceived(const QString &message);
-    void onDisconnected();
+    void onContactSelected(QListWidgetItem *item);
 
 private:
-    Ui::ClientWindow *ui;
-    Client *m_client;  // Store the client pointer
+    QListWidget *contactList;
+    QTextEdit *chatDisplay;
     QLineEdit *messageInput;
     QPushButton *sendButton;
-    QTextEdit *chatDisplay;
+    QString currentContact;
+
+    void appendMessage(const QString &sender, const QString &message, bool isSender);
 };
 
 #endif // CLIENTWINDOW_H
