@@ -1,5 +1,8 @@
 #include "client.hpp"
+#include "common.hpp"
+#include "message.hpp"
 #include <signal.h>
+#include <string>
 
 // Variable global para manejar la señal
 Client* globalClient = nullptr;
@@ -332,7 +335,7 @@ void Client::setupAndRun() {
         return;
     }
 
-    //func lambda
+    //func encargada de mostrar los contactos al inicair sesion
     auto loadContacts = [this]() {
         ifstream usersFile("data/users.json");
 
@@ -428,6 +431,34 @@ void Client::handleUserInput() {
             string content = input.substr(pos + 1);
             
             if (!receiver.empty() && !content.empty()) {
+
+                ifstream file("data/messages.json");
+                if (file.is_open()) {
+                    nlohmann::json messagesJson;
+                    // se pasa la informacion de file al json
+                    file >> messagesJson;
+                    file.close();
+
+                    cout << "\nHistorial de conversacion con " << receiver << ":"<< endl;
+
+                    // se pasa una referencia en msg
+                    for (const auto& msg : messagesJson) {
+                        string sender = msg["sender"];
+                        string dest = msg["receiver"];
+                        string text = msg["content"];
+                        string timestamp = to_string(msg["timestamp"].get<long long>());
+
+                        if ((sender == username && dest == receiver) ||
+                            (sender == receiver && dest == username)) {
+                            cout << "[" << timestamp << "] "
+                                    << sender << ": " << text << endl;
+                        }
+                    }
+
+                        cout << COLOR_CYAN << "-----------------------------------" << COLOR_RESET << endl;
+                } else {
+                    cerr << "No se pudo acceder a los mensajes.";
+                }
                 messageHandler->sendMessage(receiver, content);
             } else {
                 cout << COLOR_YELLOW << "Formato inválido. Use 'destinatario:mensaje'" << COLOR_RESET << endl;
