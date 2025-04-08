@@ -24,12 +24,16 @@ set(PROJECT_SOURCES
     mainwindow.cpp mainwindow.h mainwindow.ui
     registrationwindow.cpp registrationwindow.h registrationwindow.ui
     clientwindow.cpp clientwindow.h clientwindow.ui
+    occupiedport.cpp
+    occupiedport.h
+    occupiedport.ui
 )
 
 # Create executable
 qt_add_executable(gui
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
+    occupiedport.h occupiedport.cpp occupiedport.ui
 )
 
 # Link libraries
