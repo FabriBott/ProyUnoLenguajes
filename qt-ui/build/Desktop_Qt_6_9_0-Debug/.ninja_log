@@ -1,0 +1,12 @@
+# ninja log v6
+22	1730	1744148252174705672	qt-ui_autogen/timestamp	787443bfd5864f78
+13464	14787	1744148263941689771	qt-ui	de33deb2bf24acc
+22	1730	1744148252174705672	qt-ui_autogen/mocs_compilation.cpp	787443bfd5864f78
+1730	13464	1744148252207705627	CMakeFiles/qt-ui.dir/qt-ui_autogen/mocs_compilation.cpp.o	230f876789984315
+22	1730	1744148252174705672	/home/alonsoduran/projects/Lenguajes/ProyUnoLenguajes/qt-ui/build/Desktop_Qt_6_9_0-Debug/qt-ui_autogen/timestamp	787443bfd5864f78
+22	1730	1744148252174705672	/home/alonsoduran/projects/Lenguajes/ProyUnoLenguajes/qt-ui/build/Desktop_Qt_6_9_0-Debug/qt-ui_autogen/mocs_compilation.cpp	787443bfd5864f78
+1036	3684	1744148096009062648	CMakeFiles/qt-ui.dir/main.cpp.o	d8aeff00bc66042e
+1732	13182	1744148252209705624	CMakeFiles/qt-ui.dir/mainwindow.cpp.o	69800baeb5fc32da
+1737	11262	1744148252214705618	CMakeFiles/qt-ui.dir/registrationwindow.cpp.o	4b8a29a5744eb557
+1037	4013	1744148096009550018	CMakeFiles/qt-ui.dir/occupiedport.cpp.o	df5291a515ee9972
+1036	4683	1744148096009390372	CMakeFiles/qt-ui.dir/clientwindow.cpp.o	bff4a2451abf03d
